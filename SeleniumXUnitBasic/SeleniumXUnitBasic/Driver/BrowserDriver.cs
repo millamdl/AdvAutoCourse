@@ -7,13 +7,6 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace SeleniumXUnitBasic.Driver;
 
-public interface IBrowserDriver
-{
-    IWebDriver GetChromeDriver();
-    IWebDriver GetFirefoxDriver();
-    IWebDriver GetEdgeDriver();
-}
-
 public class BrowserDriver : IBrowserDriver
 {
     public IWebDriver GetChromeDriver()

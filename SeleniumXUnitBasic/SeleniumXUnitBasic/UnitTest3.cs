@@ -3,10 +3,6 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using SeleniumXUnitBasic.Driver;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SeleniumXUnitBasic
@@ -14,14 +10,8 @@ namespace SeleniumXUnitBasic
     public class UnitTest3 : IDisposable
     {
         IWebDriver driver;
-        IContainer container;
-        public UnitTest3()
+        public UnitTest3(IDriverFixture driverFixture)
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterType<BrowserDriver>().As<IBrowserDriver>();
-            container = builder.Build();
-
-            var driverFixture = new DriverFixture(container, Driver.BrowserType.Edge);
             driver = driverFixture.Driver;
             driver.Navigate().GoToUrl(new Uri("http://localhost:5001/"));
         }
