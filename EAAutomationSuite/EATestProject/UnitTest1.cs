@@ -3,8 +3,6 @@ using EATestFramework.Driver;
 using EATestProject.Model;
 using EATestProject.Pages;
 using FluentAssertions;
-using OpenQA.Selenium;
-using System;
 using Xunit;
 
 namespace EATestProject
