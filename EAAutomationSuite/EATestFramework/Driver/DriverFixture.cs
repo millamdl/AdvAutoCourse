@@ -16,6 +16,7 @@ public class DriverFixture : IDisposable, IDriverFixture
         this.testSettings = testSettings;
         this.browserDriver = browserDriver;
         driver = GetWebDriver();
+        driver.Navigate().GoToUrl(testSettings.ApplicationUrl);
     }
 
     public IWebDriver Driver => driver;

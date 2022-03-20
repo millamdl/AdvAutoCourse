@@ -1,4 +1,5 @@
 ﻿using EATestFramework.Driver;
+using EATestFramework.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace EATestFramework
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.UseWebDriverInitializer(BrowserType.Edge);
+            services.UseWebDriverInitializer();
             services.AddScoped<IDriverFixture, DriverFixture>();
             services.AddScoped<IBrowserDriver, BrowserDriver>();
         }

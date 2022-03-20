@@ -1,5 +1,7 @@
 ﻿using EATestFramework.Driver;
+using EATestFramework.Extensions;
 using EATestProject.Pages;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace EATestProject
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.UseWebDriverInitializer(BrowserType.Chrome);
+            services.UseWebDriverInitializer();
             services.AddScoped<IHomePage, HomePage>();
             services.AddScoped<ICreateProductPage, CreateProductPage>();
             services.AddScoped<IDriverFixture, DriverFixture>();
