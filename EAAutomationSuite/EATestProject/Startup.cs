@@ -1,12 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SeleniumXUnitBasic.Driver;
+﻿using EATestFramework.Driver;
+using EATestProject.Pages;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeleniumXUnitBasic
+namespace EATestProject
 {
     public class Startup
     {
@@ -14,7 +15,9 @@ namespace SeleniumXUnitBasic
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.UseWebDriverInitializer(BrowserType.Edge);
+            services.UseWebDriverInitializer(BrowserType.Chrome);
+            services.AddScoped<IHomePage, HomePage>();
+            services.AddScoped<ICreateProductPage, CreateProductPage>();
             services.AddScoped<IDriverFixture, DriverFixture>();
             services.AddScoped<IBrowserDriver, BrowserDriver>();
         }

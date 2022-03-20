@@ -1,11 +1,11 @@
-﻿using SeleniumXUnitBasic.Driver;
+﻿using EATestFramework.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeleniumXUnitBasic.Settings
+namespace EATestFramework.Settings
 {
     public class TestSettings
     {

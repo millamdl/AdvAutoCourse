@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SeleniumXUnitBasic.Settings;
+using EATestFramework.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeleniumXUnitBasic.Driver
+namespace EATestFramework.Driver
 {
     public static class WebDriverInitializerExtension
     {
