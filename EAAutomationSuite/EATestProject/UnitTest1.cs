@@ -26,6 +26,8 @@ namespace EATestProject
             homePage.CreateProduct();
 
             createProductPage.EnterProductDetails(product);
+
+            homePage.PerformClickOnSpecialValue("Monitor","Details");
         }
     }
 }
