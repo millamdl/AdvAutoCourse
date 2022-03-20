@@ -11,16 +11,17 @@ using System.Threading.Tasks;
 
 namespace EATestProject.Pages
 {
-    public interface ICreateProductPage
+    public interface IProductPage
     {
         void EnterProductDetails(Product product);
+        Product GetProductDetails();
     }
 
-    public class CreateProductPage : ICreateProductPage
+    public class ProductPage : IProductPage
     {
         private readonly IWebDriver driver;
 
-        public CreateProductPage(IDriverFixture driverFixture) => driver = driverFixture.Driver;
+        public ProductPage(IDriverFixture driverFixture) => driver = driverFixture.Driver;
         IWebElement txtName => driver.FindElement(By.Id("Name"));
         IWebElement txtDescription => driver.FindElement(By.Id("Description"));
         IWebElement txtPrice => driver.FindElement(By.Id("Price"));
@@ -34,6 +35,18 @@ namespace EATestProject.Pages
             txtPrice.SendKeys(product.Price.ToString());
             ddlProductType.SelectDropDownByText(product.ProductType.ToString());
             btnCreate.Click();
+        }
+
+        public Product GetProductDetails()
+        {
+            return new Product()
+            {
+                Name = txtName.Text,
+                Description = txtDescription.Text,
+                Price = int.Parse(txtPrice.Text),
+                ProductType = (ProductType)Enum.Parse(typeof(ProductType), 
+                                ddlProductType.GetAttribute("innerText").ToString())
+            };
         }
 
     }

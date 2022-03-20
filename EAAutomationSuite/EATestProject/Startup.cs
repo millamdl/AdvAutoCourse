@@ -19,7 +19,7 @@ namespace EATestProject
         {
             services.UseWebDriverInitializer();
             services.AddScoped<IHomePage, HomePage>();
-            services.AddScoped<ICreateProductPage, CreateProductPage>();
+            services.AddScoped<IProductPage, ProductPage>();
             services.AddScoped<IDriverFixture, DriverFixture>();
             services.AddScoped<IBrowserDriver, BrowserDriver>();
         }

@@ -2,6 +2,7 @@ using AutoFixture.Xunit2;
 using EATestFramework.Driver;
 using EATestProject.Model;
 using EATestProject.Pages;
+using FluentAssertions;
 using OpenQA.Selenium;
 using System;
 using Xunit;
@@ -11,12 +12,12 @@ namespace EATestProject
     public class UnitTest1 
     {
         private readonly IHomePage homePage;
-        private readonly ICreateProductPage createProductPage;
+        private readonly IProductPage productPage;
 
-        public UnitTest1(IHomePage homePage, ICreateProductPage createProductPage)
+        public UnitTest1(IHomePage homePage, IProductPage productPage)
         {
             this.homePage = homePage;
-            this.createProductPage = createProductPage;
+            this.productPage = productPage;
         }
 
         [Theory, AutoData]
@@ -25,9 +26,17 @@ namespace EATestProject
             // Separation of Concern
             homePage.CreateProduct();
 
-            createProductPage.EnterProductDetails(product);
+            productPage.EnterProductDetails(product);
 
-            homePage.PerformClickOnSpecialValue("Monitor","Details");
+            homePage.PerformClickOnSpecialValue(product.Name,"Details");
+
+            //assertion
+            var actualProduct = productPage.GetProductDetails();
+
+            actualProduct
+                .Should()
+                .BeEquivalentTo(product, option => option.Excluding(x => x.Id));
+            
         }
     }
 }
