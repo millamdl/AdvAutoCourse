@@ -125,6 +125,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
  testRunner.Then("I see all the product details are created as expected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 13
+ testRunner.And("I delete the product Headphones for cleanup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }
