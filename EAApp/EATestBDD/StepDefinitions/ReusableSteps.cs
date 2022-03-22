@@ -20,4 +20,30 @@ public class ReusableSteps
         productRepository.DeleteProduct(productName);
     }
 
+    [Given(@"I ensure the following product is created")]
+    public void GivenIEnsureTheFollowingProductIsCreated(Table table)
+    {
+        var product = table.CreateInstance<Product>();
+        productRepository.AddProduct(product);
+
+        //Store the product details
+        scenarioContext.Set<Product>(product);
+    }
+
+    [Given(@"I cleanup following data")]
+    public void GivenICleanupFollowingData(Table table)
+    {
+        var products = table.CreateSet<Product>();
+
+        foreach (var product in products)
+        {
+            var prod = productRepository.GetProductByName(product.Name);
+
+            if (prod != null)
+                productRepository.DeleteProduct(product.Name);
+        }
+
+    }
+
+
 }
