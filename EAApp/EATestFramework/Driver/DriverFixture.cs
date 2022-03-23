@@ -11,7 +11,8 @@ namespace EATestFramework.Driver;
 
 public class DriverFixture : IDriverFixture, IDisposable
 {
-    RemoteWebDriver driver;
+    //RemoteWebDriver driver;
+    IWebDriver driver;
     private readonly TestSettings testSettings;
     private readonly IBrowserDriver browserDriver;
 
