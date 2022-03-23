@@ -42,7 +42,7 @@ namespace ProductAPI.Data
                         }
                     };
 
-                context.Products.AddRange(products);
+                context.Products.AddRange (products);
                 context.SaveChanges();
             }
         }

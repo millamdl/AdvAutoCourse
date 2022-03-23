@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -20,17 +19,12 @@ public class BrowserDriver : IBrowserDriver
         new DriverManager().SetUpDriver(new FirefoxConfig());
         return new FirefoxDriver();
     }
-
-    public IWebDriver GetEdgeDriver()
-    {
-        new DriverManager().SetUpDriver(new EdgeConfig());
-        return new EdgeDriver();
-    }
 }
 
 public enum BrowserType
 {
     Chrome,
-    Edge,
-    Firefox
+    Firefox,
+    Safari,
+    Edge
 }

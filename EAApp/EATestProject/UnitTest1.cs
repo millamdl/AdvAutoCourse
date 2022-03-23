@@ -1,40 +1,65 @@
 using AutoFixture.Xunit2;
-using EATestFramework.Driver;
 using EATestProject.Model;
 using EATestProject.Pages;
 using FluentAssertions;
 using Xunit;
 
-namespace EATestProject
+namespace EATestProject;
+public class UnitTest1
 {
-    public class UnitTest1 
+    private readonly IHomePage homePage;
+    private readonly IProductPage productPage;
+    public UnitTest1(IHomePage homePage, IProductPage createProductPage)
     {
-        private readonly IHomePage homePage;
-        private readonly IProductPage productPage;
+        this.homePage = homePage;
+        this.productPage = createProductPage;
+    }
 
-        public UnitTest1(IHomePage homePage, IProductPage productPage)
-        {
-            this.homePage = homePage;
-            this.productPage = productPage;
-        }
+    [Theory, AutoData]
+    public void Test1(Product product)
+    {
+        //Separation of concern
+        homePage.CreateProduct();
 
-        [Theory, AutoData]
-        public void Test1(Product product)
-        {
-            // Separation of Concern
-            homePage.CreateProduct();
+        productPage.EnterProductDetails(product);
+    }
 
-            productPage.EnterProductDetails(product);
+    [Theory, AutoData]
+    public void Test2(Product product)
+    {
+        //Separation of concern
+        homePage.CreateProduct();
 
-            homePage.PerformClickOnSpecialValue(product.Name,"Details");
+        productPage.EnterProductDetails(product);
+    }
 
-            //assertion
-            var actualProduct = productPage.GetProductDetails();
+    [Theory, AutoData]
+    public void Test3(Product product)
+    {
+        //Separation of concern
+        homePage.CreateProduct();
 
-            actualProduct
-                .Should()
-                .BeEquivalentTo(product, option => option.Excluding(x => x.Id));
-            
-        }
+        productPage.EnterProductDetails(product);
+
+        homePage.PerformClickOnSpecialValue(product.Name, "Details");
+
+        //assertion
+        var actualProduct = productPage.GetProductDetails();
+
+        actualProduct
+            .Should()
+            .BeEquivalentTo(product,option => option.Excluding(x => x.Id));
+
+    }
+
+    [Theory, AutoData]
+    public void Test4(Product product)
+    {
+        product.ProductType = ProductType.PERIPHARALS;
+        //Separation of concern
+        homePage.CreateProduct();
+
+        productPage.EnterProductDetails(product);
+
     }
 }

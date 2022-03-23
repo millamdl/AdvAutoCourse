@@ -1,4 +1,4 @@
-namespace EATestProject.Model
+﻿namespace EATestProject.Model
 {
     public class Product
     {
@@ -6,7 +6,6 @@ namespace EATestProject.Model
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-
         public ProductType ProductType { get; set; }
     }
 

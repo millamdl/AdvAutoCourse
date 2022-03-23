@@ -21,9 +21,10 @@ public class ReusableSteps
     }
 
     [Given(@"I ensure the following product is created")]
-    public void GivenIEnsureTheFollowingProductIsCreated(Table table)
+    public void GivenIEnsureTheFollowingProjectIsCreated(Table table)
     {
         var product = table.CreateInstance<Product>();
+
         productRepository.AddProduct(product);
 
         //Store the product details
@@ -42,8 +43,8 @@ public class ReusableSteps
             if (prod != null)
                 productRepository.DeleteProduct(product.Name);
         }
-
     }
+
 
 
 }

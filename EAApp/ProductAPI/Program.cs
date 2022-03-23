@@ -17,9 +17,10 @@ namespace ProductAPI
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
+
+            using(var scope = host.Services.CreateScope())
             {
-                scope.ServiceProvider.GetService<ProductDbContext>().Database.Migrate();                
+                scope.ServiceProvider.GetRequiredService<ProductDbContext>().Database.Migrate();
             }
 
             host.Run();

@@ -5,38 +5,35 @@ using ProductAPI.Data;
 using ProductAPI.Repository;
 using SolidToken.SpecFlow.DependencyInjection;
 
-namespace EATestBDD
+namespace EATestBDD;
+
+public static class Startup
 {
-    public static class Startup
+    [ScenarioDependencies]
+    public static IServiceCollection CreateServices()
     {
+        var services = new ServiceCollection();
 
-        [ScenarioDependencies]
-        public static IServiceCollection CreateServices()
-        {
-            var services = new ServiceCollection();
+        string projectPath = AppDomain.CurrentDomain.BaseDirectory.Split(new String[] { @"bin\" }, StringSplitOptions.None)[0];
 
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+                     .SetBasePath(projectPath)
+                     .AddJsonFile("appsettings.json")
+                     .Build();
 
-            string projectPath = AppDomain.CurrentDomain.BaseDirectory.Split(new String[] { @"bin\" }, StringSplitOptions.None)[0];
+        string connectionString = configuration.GetConnectionString("DefaultConnection");
+        services.AddDbContext<ProductDbContext>(
+                            option => option
+                                      .UseSqlServer(connectionString));
 
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(projectPath)
-                .AddJsonFile("appsettings.json")
-                .Build();
+        services.AddTransient<IProductRepository, ProductRepository>();
+        services.UseWebDriverInitializer();
+        services.AddScoped<IHomePage, HomePage>();
+        services.AddScoped<IProductPage, ProductPage>();
+        services.AddScoped<IDriverFixture, DriverFixture>();
+        services.AddScoped<IBrowserDriver, BrowserDriver>();
 
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDbContext<ProductDbContext>(option =>
-                   option
-                        .UseSqlServer(connectionString));
-            services.AddTransient<IProductRepository, ProductRepository>();
-
-            services.UseWebDriverInitializer();
-            services.AddScoped<IHomePage, HomePage>();
-            services.AddScoped<IProductPage, ProductPage>();
-            services.AddScoped<IDriverFixture, DriverFixture>();
-            services.AddScoped<IBrowserDriver, BrowserDriver>();
-
-            return services;
-        }
+        return services;
     }
+
 }
