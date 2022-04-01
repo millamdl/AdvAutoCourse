@@ -34,8 +34,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="appsettings.json">
+	  <Compile Update="test.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>test.runsettings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.local.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="appsettings.remote.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="test.runsettings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>test.Designer.cs</LastGenOutput>
 	  </None>
 	</ItemGroup>
 

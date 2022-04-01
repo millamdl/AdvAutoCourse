@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System;
 
 namespace EATestFramework.Extensions;
 public static class WebDriverInitializerExtension
@@ -19,10 +20,12 @@ public static class WebDriverInitializerExtension
 
     private static TestSettings ReadConfig()
     {
+        var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
         var configFile = File
                         .ReadAllText(Path.GetDirectoryName(
                             Assembly.GetExecutingAssembly().Location) 
-                        + "/appsettings.json");
+                        + $"/appsettings.{environmentName}.json");
 
         var jsonSerializeOptions = new JsonSerializerOptions()
         {
