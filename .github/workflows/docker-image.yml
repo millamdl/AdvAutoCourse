@@ -18,3 +18,8 @@ jobs:
       run: |
         echo -- Running Tests ---
         sh ./EAApp/scripts/run.sh
+    - name: Publish the report as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: SpecFlowReport
+        path: ./reports

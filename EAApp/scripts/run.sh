@@ -11,9 +11,14 @@ export COMPOSE_HTTP_TIMEOUT=200
 
 docker-compose -p "$project" build
 
+mkdir -m 777 reports
+
 docker-compose -p "$project" up -d ea_api ea_webapp db selenium-hub firefox chrome
 docker-compose -p "$project" up --no-deps ea_test
 
+docker cp ea_test:/src/EATestBDD/LivingDoc.html ./reports
+echo "SpecFlow LivingDoc Report copied to ./reports
+"
 exit_code=$(docker inspect ea_test -f '{{ .State.ExitCode }}')
 
 if [ $exit_code -eq 0 ]; then
