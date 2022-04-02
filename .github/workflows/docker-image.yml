@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Running the script file
+      run: |
+        echo -- Running Tests ---
+        sh ./EAApp/scripts/run.sh
+    - name: Publish the report as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: SpecFlowReport
+        path: ./EAApp/reports
+    - name: Publish LivingDoc Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./EAApp/reports
